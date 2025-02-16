@@ -1,3 +1,12 @@
+import { PluginListenerHandle } from '@capacitor/core';
+
+export interface SmsSendOptions {
+  phone: string;
+  message: string;
+}
+
 export interface SmsPluginPlugin {
-  echo(options: { value: string }): Promise<{ value: string }>;
+  start(): Promise<void>;
+  send(options: SmsSendOptions): Promise<void>;
+  addListener(eventName: 'onSmsReceived', listenerFunc: (data: { message: string }) => void): PluginListenerHandle;
 }
